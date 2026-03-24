@@ -19,14 +19,14 @@
   <style>
     * { box-sizing: border-box; }
     body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background:
-    linear-gradient(rgba(255, 230, 238, 0.72), rgba(255, 245, 248, 0.78)),
-    url('IMG_0533.png') center center / cover no-repeat fixed;
-  min-height: 100vh;
-  color: #3f3f46;
-}
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        linear-gradient(rgba(255, 230, 238, 0.72), rgba(255, 245, 248, 0.78)),
+        url('IMG_0533.png') center center / cover no-repeat fixed;
+      min-height: 100vh;
+      color: #3f3f46;
+    }
     .page {
       min-height: 100vh;
       display: flex;
@@ -55,19 +55,40 @@
     }
     .center { text-align: center; }
     .badge {
-      width: 64px; height: 64px; border-radius: 999px; margin: 0 auto 16px;
-      background: #ffe2eb; display: flex; align-items: center; justify-content: center; font-size: 28px;
+      width: 64px;
+      height: 64px;
+      border-radius: 999px;
+      margin: 0 auto 16px;
+      background: #ffe2eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
     }
     .eyebrow {
-      color: #e7a1b7; text-transform: uppercase; letter-spacing: 0.28em; font-size: 12px; margin-bottom: 14px;
+      color: #e7a1b7;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      font-size: 12px;
+      margin-bottom: 14px;
     }
     h1 { font-size: clamp(30px, 5vw, 52px); margin: 0 0 16px; color: #27272a; }
     h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 12px; color: #27272a; }
     p { line-height: 1.7; font-size: 17px; }
     .muted { color: #71717a; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+    }
     button {
-      border: 0; border-radius: 18px; padding: 14px 20px; font-size: 15px; cursor: pointer;
+      border: 0;
+      border-radius: 18px;
+      padding: 14px 20px;
+      font-size: 15px;
+      cursor: pointer;
       transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
     button:hover { transform: scale(1.04); }
@@ -80,43 +101,120 @@
     .dot.active { width: 30px; background: #f48fb1; }
     .envelope-wrap { width: 100%; max-width: 760px; height: 460px; position: relative; }
     .letter {
-      position: absolute; left: 24px; right: 24px; top: 86px; bottom: 28px; z-index: 10;
-      background: linear-gradient(to bottom, white, #fff5f8); border: 1px solid #ffd6e2; border-radius: 28px;
-      box-shadow: 0 24px 60px rgba(212, 93, 133, 0.18); display: flex; align-items: center; justify-content: center;
-      text-align: center; padding: 40px; transition: transform .8s ease, opacity .8s ease;
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      top: 86px;
+      bottom: 28px;
+      z-index: 10;
+      background: linear-gradient(to bottom, white, #fff5f8);
+      border: 1px solid #ffd6e2;
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(212, 93, 133, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      transition: transform .8s ease, opacity .8s ease;
     }
     .letter.opening { transform: translateY(-22px) scale(.98); }
     .envelope {
-      position: absolute; left: 0; right: 0; bottom: 0; height: 260px; border-radius: 30px; overflow: hidden;
-      background: linear-gradient(to bottom, #f8bbd0, #f48fb1); border: 1px solid #f6a8c2; box-shadow: 0 20px 50px rgba(212, 93, 133, 0.2);
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 260px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: linear-gradient(to bottom, #f8bbd0, #f48fb1);
+      border: 1px solid #f6a8c2;
+      box-shadow: 0 20px 50px rgba(212, 93, 133, 0.2);
       pointer-events: none;
     }
     .flap {
-      position: absolute; top: 0; left: 0; right: 0; height: 170px; background: #f8bbd0;
-      clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .8s ease; z-index: 4;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 170px;
+      background: #f8bbd0;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform .8s ease;
+      z-index: 4;
     }
     .flap.opening { transform: rotateX(180deg); }
-    .front { position: absolute; left: 0; right: 0; bottom: 0; height: 170px; background: #f48fb1; clip-path: polygon(0 100%,0 25%,50% 0,100% 25%,100% 100%); z-index: 5; }
-    .side-left, .side-right { position: absolute; top: 0; bottom: 0; width: 50%; background: rgba(248,187,208,.8); z-index: 5; }
+    .front {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 170px;
+      background: #f48fb1;
+      clip-path: polygon(0 100%,0 25%,50% 0,100% 25%,100% 100%);
+      z-index: 5;
+    }
+    .side-left, .side-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      background: rgba(248,187,208,.8);
+      z-index: 5;
+    }
     .side-left { left: 0; clip-path: polygon(0 0,100% 50%,0 100%); }
     .side-right { right: 0; clip-path: polygon(100% 0,0 50%,100% 100%); }
     .seal {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 6; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 6;
+      pointer-events: none;
     }
     .seal span {
-      width: 58px; height: 58px; border-radius: 999px; background: rgba(255,255,255,.82); display: inline-flex; align-items: center; justify-content: center; font-size: 28px;
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.82);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
       box-shadow: 0 10px 24px rgba(0,0,0,.08);
     }
     .grid { display: grid; gap: 18px; }
     .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .box { border: 1px solid #ffd6e2; border-radius: 26px; padding: 20px; background: #fff; }
+    .box {
+      border: 1px solid #ffd6e2;
+      border-radius: 26px;
+      padding: 20px;
+      background: #fff;
+    }
     .box.soft { background: rgba(255, 241, 245, 0.7); }
     .option-btn, .meet-btn {
-      width: 100%; text-align: left; background: white; color: #52525b; border: 1px solid #ffd6e2; margin-bottom: 10px;
+      width: 100%;
+      text-align: left;
+      background: white;
+      color: #52525b;
+      border: 1px solid #ffd6e2;
+      margin-bottom: 10px;
     }
-    .option-btn.active, .meet-btn.active { background: #f06292; color: white; border-color: #f06292; }
+    .option-btn.active, .meet-btn.active {
+      background: #f06292;
+      color: white;
+      border-color: #f06292;
+    }
     textarea {
-      width: 100%; border: 1px solid #ffd6e2; border-radius: 18px; padding: 14px; font: inherit; resize: vertical; min-height: 90px;
+      width: 100%;
+      border: 1px solid #ffd6e2;
+      border-radius: 18px;
+      padding: 14px;
+      font: inherit;
+      resize: vertical;
+      min-height: 90px;
     }
     .summary { background: linear-gradient(135deg, #fff1f5, #fff7fb); }
     .small { font-size: 14px; color: #71717a; }
@@ -125,15 +223,24 @@
     #grumpyBtn { position: relative; }
     .hearts-burst { position: relative; height: 20px; }
     .heart-pop {
-      position: absolute; left: 50%; top: 0; transform: translateX(-50%); opacity: 0; animation: floatUp 1.8s ease forwards;
-      color: #f06292; font-size: 18px;
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: floatUp 1.8s ease forwards;
+      color: #f06292;
+      font-size: 18px;
     }
     @keyframes floatUp {
       0% { opacity: 0; transform: translate(-50%, 0) scale(.6); }
       20% { opacity: 1; }
       100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-1 * var(--y))) scale(1); }
     }
-    @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } .card { padding: 24px; } }
+    @media (max-width: 760px) {
+      .cols { grid-template-columns: 1fr; }
+      .card { padding: 24px; }
+    }
   </style>
 </head>
 <body>
@@ -211,9 +318,21 @@
       </div>
 
       <div id="repairSection" class="hidden" style="margin-top:28px;">
+        <div class="box soft" style="margin-bottom:18px;">
+          <h2 style="font-size:22px;">What can I do to fix us?</h2>
+          <p class="muted" style="margin-bottom:10px;">Things I promise to work on:</p>
+          <ul style="text-align:left; line-height:1.8; color:#52525b; padding-left:22px; margin:0;">
+            <li>I promise I’ll be more careful with my words next time.</li>
+            <li>I’ll work on communicating better with you.</li>
+            <li>I’ll listen properly before reacting.</li>
+            <li>I’ll try harder to understand your side too, not just my feelings.</li>
+            <li>I want us to handle fights with more love, not more hurt.</li>
+          </ul>
+        </div>
+
         <div class="grid cols">
           <div class="box soft">
-            <h2 style="font-size:22px;">Choose your repair package</h2>
+            <h2 style="font-size:22px;">Choose Your Repair Package</h2>
             <div id="repairOptions"></div>
           </div>
           <div class="box">
@@ -224,7 +343,7 @@
         </div>
 
         <div class="box" style="margin-top:18px;">
-          <h2 style="font-size:22px;">Submit complaint about your girlfriend</h2>
+          <h2 style="font-size:22px;">Customize Package / Submit complaint about your girlfriend</h2>
           <label class="small">What do you need from me that I'm not giving you?</label>
           <textarea id="needsInput" placeholder="Tell me honestly. I'm listening."></textarea>
           <label class="small">What hurt you the most?</label>
@@ -265,12 +384,12 @@
     ];
 
     const repairOptions = [
-      "I promise I'll be more careful and not repeat this",
-      "I'll work on communicating better with you",
-      "Don't give me space, talk to me instead",
-      "Let's meet after work and fix this properly",
-      "Tell me what you need from me, and I'll listen",
-      "Let's set better rules for how we handle fights"
+      "Let’s forgive and forget, then start fresh again. Restart, redo… text me? 😬",
+      "I’ll send you an ‘I’m sorry please don’t be mad at me’ package to your house. I’m not fully sure what’ll be inside yet, but I’ll figure it out soon.",
+      "Meet me after work and let’s make peace properly.",
+      "One big hug to heal the broken parts.",
+      "Custom package — you tell me what you want below.",
+      "I’m done. I don’t think we can continue anymore."
     ];
 
     const meetOptions = ["Wednesday after work", "Thursday after work", "Friday after work"];
@@ -348,16 +467,33 @@
       const btn = document.createElement('button');
       btn.className = 'option-btn';
       btn.textContent = option;
-      btn.onclick = () => {
-        if (selectedRepairs.has(option)) {
-          selectedRepairs.delete(option);
-          btn.classList.remove('active');
-        } else {
-          selectedRepairs.add(option);
-          btn.classList.add('active');
-        }
-        updateSummary();
-      };
+
+      if (option === "I’m done. I don’t think we can continue anymore.") {
+        btn.classList.add('ghost');
+        btn.onmouseenter = () => {
+          const x = Math.floor(Math.random() * 120) - 60;
+          const y = Math.floor(Math.random() * 60) - 30;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        };
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const x = Math.floor(Math.random() * 120) - 60;
+          const y = Math.floor(Math.random() * 60) - 30;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        };
+      } else {
+        btn.onclick = () => {
+          if (selectedRepairs.has(option)) {
+            selectedRepairs.delete(option);
+            btn.classList.remove('active');
+          } else {
+            selectedRepairs.add(option);
+            btn.classList.add('active');
+          }
+          updateSummary();
+        };
+      }
+
       repairWrap.appendChild(btn);
     });
 
@@ -403,7 +539,10 @@
     document.getElementById('resetAnswersBtn').onclick = () => {
       selectedRepairs.clear();
       selectedMeet = '';
-      document.querySelectorAll('.option-btn,.meet-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.option-btn,.meet-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.transform = '';
+      });
       needsInput.value = '';
       hurtInput.value = '';
       rightNowInput.value = '';
