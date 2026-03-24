@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My One And Only</title>
+  <meta property="og:title" content="For My One And Only — Al Harith Kifah" />
+  <meta property="og:description" content="I made this just for you. Read me when you're ready. 🤍" />
+  <meta property="og:type" content="website" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #ffe4ec, #fff7fa 50%, #ffffff);
+      min-height: 100vh;
+      color: #3f3f46;
+    }
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sparkle, .heart-bg {
+      position: absolute;
+      opacity: 0.25;
+      font-size: 28px;
+      pointer-events: none;
+    }
+    .card {
+      width: 100%;
+      max-width: 860px;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid #ffd6e2;
+      border-radius: 32px;
+      box-shadow: 0 24px 60px rgba(212, 93, 133, 0.18);
+      padding: 32px;
+      position: relative;
+      z-index: 2;
+    }
+    .center { text-align: center; }
+    .badge {
+      width: 64px; height: 64px; border-radius: 999px; margin: 0 auto 16px;
+      background: #ffe2eb; display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .eyebrow {
+      color: #e7a1b7; text-transform: uppercase; letter-spacing: 0.28em; font-size: 12px; margin-bottom: 14px;
+    }
+    h1 { font-size: clamp(30px, 5vw, 52px); margin: 0 0 16px; color: #27272a; }
+    h2 { font-size: clamp(24px, 4vw, 34px); margin: 0 0 12px; color: #27272a; }
+    p { line-height: 1.7; font-size: 17px; }
+    .muted { color: #71717a; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px; }
+    button {
+      border: 0; border-radius: 18px; padding: 14px 20px; font-size: 15px; cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    button:hover { transform: scale(1.04); }
+    .primary { background: #f06292; color: white; box-shadow: 0 12px 24px rgba(240, 98, 146, .24); }
+    .secondary { background: #fff1f5; color: #e25588; border: 1px solid #ffd6e2; }
+    .ghost { background: #fff; color: #e7a1b7; border: 1px solid #ffd6e2; }
+    .hidden { display: none !important; }
+    .progress { display: flex; justify-content: center; gap: 8px; margin-top: 26px; }
+    .dot { width: 10px; height: 10px; border-radius: 999px; background: #f8cad8; transition: .2s; }
+    .dot.active { width: 30px; background: #f48fb1; }
+    .envelope-wrap { width: 100%; max-width: 760px; height: 460px; position: relative; }
+    .letter {
+      position: absolute; left: 24px; right: 24px; top: 86px; bottom: 28px; z-index: 10;
+      background: linear-gradient(to bottom, white, #fff5f8); border: 1px solid #ffd6e2; border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(212, 93, 133, 0.18); display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 40px; transition: transform .8s ease, opacity .8s ease;
+    }
+    .letter.opening { transform: translateY(-22px) scale(.98); }
+    .envelope {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 260px; border-radius: 30px; overflow: hidden;
+      background: linear-gradient(to bottom, #f8bbd0, #f48fb1); border: 1px solid #f6a8c2; box-shadow: 0 20px 50px rgba(212, 93, 133, 0.2);
+      pointer-events: none;
+    }
+    .flap {
+      position: absolute; top: 0; left: 0; right: 0; height: 170px; background: #f8bbd0;
+      clip-path: polygon(0 0, 100% 0, 50% 100%); transform-origin: top; transition: transform .8s ease; z-index: 4;
+    }
+    .flap.opening { transform: rotateX(180deg); }
+    .front { position: absolute; left: 0; right: 0; bottom: 0; height: 170px; background: #f48fb1; clip-path: polygon(0 100%,0 25%,50% 0,100% 25%,100% 100%); z-index: 5; }
+    .side-left, .side-right { position: absolute; top: 0; bottom: 0; width: 50%; background: rgba(248,187,208,.8); z-index: 5; }
+    .side-left { left: 0; clip-path: polygon(0 0,100% 50%,0 100%); }
+    .side-right { right: 0; clip-path: polygon(100% 0,0 50%,100% 100%); }
+    .seal {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 6; pointer-events: none;
+    }
+    .seal span {
+      width: 58px; height: 58px; border-radius: 999px; background: rgba(255,255,255,.82); display: inline-flex; align-items: center; justify-content: center; font-size: 28px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+    .grid { display: grid; gap: 18px; }
+    .cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .box { border: 1px solid #ffd6e2; border-radius: 26px; padding: 20px; background: #fff; }
+    .box.soft { background: rgba(255, 241, 245, 0.7); }
+    .option-btn, .meet-btn {
+      width: 100%; text-align: left; background: white; color: #52525b; border: 1px solid #ffd6e2; margin-bottom: 10px;
+    }
+    .option-btn.active, .meet-btn.active { background: #f06292; color: white; border-color: #f06292; }
+    textarea {
+      width: 100%; border: 1px solid #ffd6e2; border-radius: 18px; padding: 14px; font: inherit; resize: vertical; min-height: 90px;
+    }
+    .summary { background: linear-gradient(135deg, #fff1f5, #fff7fb); }
+    .small { font-size: 14px; color: #71717a; }
+    .runaway-wrap { min-height: 170px; position: relative; overflow: hidden; }
+    .runaway-area { position: relative; height: 70px; }
+    #grumpyBtn { position: relative; }
+    .hearts-burst { position: relative; height: 20px; }
+    .heart-pop {
+      position: absolute; left: 50%; top: 0; transform: translateX(-50%); opacity: 0; animation: floatUp 1.8s ease forwards;
+      color: #f06292; font-size: 18px;
+    }
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(.6); }
+      20% { opacity: 1; }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--x)), calc(-1 * var(--y))) scale(1); }
+    }
+    @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } .card { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="heart-bg" style="top:40px;left:34px;">❤</div>
+    <div class="sparkle" style="top:74px;right:44px;">✦</div>
+    <div class="heart-bg" style="bottom:90px;left:64px;">❤</div>
+    <div class="sparkle" style="bottom:40px;right:50px;">✦</div>
+
+    <div id="envelopeScreen" class="envelope-wrap">
+      <div id="letter" class="letter">
+        <div>
+          <div class="eyebrow">A letter for you</div>
+          <h1>For My One And Only</h1>
+          <p style="font-size:30px;margin:0 0 24px;color:#3f3f46;">Al Harith Kifah</p>
+          <button type="button" class="primary" id="readMeBtn">Read Me</button>
+        </div>
+      </div>
+      <div class="envelope">
+        <div id="flap" class="flap"></div>
+        <div class="front"></div>
+        <div class="side-left"></div>
+        <div class="side-right"></div>
+        <div class="seal"><span>🤍</span></div>
+      </div>
+    </div>
+
+    <div id="slideCard" class="card center hidden">
+      <div class="badge">🤍</div>
+      <div class="eyebrow">A tiny message from your girl</div>
+      <h1 id="slideTitle"></h1>
+      <p id="slideText" class="muted"></p>
+      <div class="buttons">
+        <button id="nextBtn" class="primary"></button>
+        <button id="backBtn" class="secondary hidden">Go back hehe</button>
+      </div>
+      <div id="progress" class="progress"></div>
+    </div>
+
+    <div id="finalCard" class="card hidden">
+      <div class="center">
+        <div class="badge">🤍</div>
+        <h1>I still choose you 🤍</h1>
+        <p class="muted">Even when we fight. Even when things feel heavy. Even when you're upset with me.</p>
+        <p class="muted">I'm still here, loving you quietly, missing you a lot, and hoping we'll be okay again soon.</p>
+        <div class="buttons">
+          <button class="primary" id="toggleRepairBtn">Click more — what can I do to fix us?</button>
+          <button class="secondary">Come back to me when you're ready ♡</button>
+          <button class="ghost" id="restartBtn">Read this again</button>
+        </div>
+
+        <div class="box soft" style="max-width:640px;margin:24px auto 0;">
+          <div class="eyebrow" style="letter-spacing:.2em;">Important boyfriend decision</div>
+          <h2>Are you ready to forgive your girl?</h2>
+          <p class="muted">Choose very carefully, mister.</p>
+          <div class="runaway-wrap">
+            <div id="forgiveState">
+              <div class="runaway-area buttons">
+                <button id="forgiveBtn" class="primary">Yes, come here baby ♡</button>
+                <button id="grumpyBtn" class="ghost">Still grumpy</button>
+              </div>
+              <p id="grumpyText" class="small">Try pressing the grumpy button if you can 😌</p>
+            </div>
+            <div id="forgivenState" class="hidden center">
+              <div id="heartBurst" class="hearts-burst"></div>
+              <p style="font-size:28px;margin:0;">🥺🤍</p>
+              <p style="font-size:20px;color:#27272a;margin:10px 0 6px;"><strong>Yay. Knew your heart was soft for me.</strong></p>
+              <p class="small" style="margin-bottom:14px;">Now come collect your clingy girlfriend.</p>
+              <button class="primary">Text me now, mister ♡</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="small">You don't have to un-mad immediately. Just don't give up on us.</p>
+      </div>
+
+      <div id="repairSection" class="hidden" style="margin-top:28px;">
+        <div class="grid cols">
+          <div class="box soft">
+            <h2 style="font-size:22px;">Choose your repair package</h2>
+            <div id="repairOptions"></div>
+          </div>
+          <div class="box">
+            <h2 style="font-size:22px;">Book a peace meeting</h2>
+            <div id="meetOptions"></div>
+            <div class="box soft" style="padding:14px;margin-top:8px;">Still handsome even when angry, by the way.</div>
+          </div>
+        </div>
+
+        <div class="box" style="margin-top:18px;">
+          <h2 style="font-size:22px;">Submit complaint about your girlfriend</h2>
+          <label class="small">What do you need from me that I'm not giving you?</label>
+          <textarea id="needsInput" placeholder="Tell me honestly. I'm listening."></textarea>
+          <label class="small">What hurt you the most?</label>
+          <textarea id="hurtInput" placeholder="I want to understand your side too."></textarea>
+          <label class="small">What can I do right now to make this better?</label>
+          <textarea id="rightNowInput" placeholder="You can be honest with me."></textarea>
+        </div>
+
+        <div class="box summary" style="margin-top:18px;">
+          <h2 style="font-size:22px;">Your boyfriend recovery plan</h2>
+          <p id="summaryText" class="muted" style="white-space:pre-line"></p>
+          <div class="buttons" style="justify-content:flex-start;">
+            <button id="copyBtn" class="primary">Copy my answers</button>
+            <button id="submitBtn" class="secondary">Submit answers</button>
+            <button id="resetAnswersBtn" class="ghost">Start over baby</button>
+          </div>
+          <p id="submitStatus" class="small"></p>
+          <p class="small">Connected email target: hafizahjamiah@yahoo.com</p>
+        </div>
+      </div>
+
+      <p class="small center" style="padding-top:16px;">Made with love, just for you</p>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyI2OVsCT4v6kPhi_IL94h0odkCX_Lwx5Uv2cZtdy4u94vraUr_O6bi4CwezogeCXuOaA/exec";
+    const recipientName = "Al Harith Kifah";
+    const notificationEmail = "hafizahjamiah@yahoo.com";
+
+    const slides = [
+      { title: "Hi baby...", text: "Before you roll your eyes and act all grumpy, just hear me out for a second 🤍", button: "Okay fine, continue" },
+      { title: "I know you're mad", text: "And honestly... I get it. I'm not here to argue, defend myself, or annoy you more. I just miss you a lot.", button: "Keep going" },
+      { title: "Official apology corner", text: "I'm really sorry for what happened. I hate that we fought, and I hate this distance between us even more.", button: "Hmm okay" },
+      { title: "Reasons to forgive me", text: "1. I'm your girl 🤍 2. I miss you terribly 3. Being mad at me for too long is bad for your handsome face", button: "Valid reasons" },
+      { title: "Real talk", text: "You matter to me a lot. I'm not sending this to pressure you — I just want you to know that I love you, I care about us, and I'm here when you're ready.", button: "One more thing" },
+      { title: "Final question...", text: "Can my favourite person please come back to me when his heart feels softer? 🥺", button: "Click for my answer" }
+    ];
+
+    const repairOptions = [
+      "I promise I'll be more careful and not repeat this",
+      "I'll work on communicating better with you",
+      "Don't give me space, talk to me instead",
+      "Let's meet after work and fix this properly",
+      "Tell me what you need from me, and I'll listen",
+      "Let's set better rules for how we handle fights"
+    ];
+
+    const meetOptions = ["Wednesday after work", "Thursday after work", "Friday after work"];
+
+    let step = 0;
+    let catchCount = 0;
+    const selectedRepairs = new Set();
+    let selectedMeet = "";
+
+    const envelopeScreen = document.getElementById('envelopeScreen');
+    const slideCard = document.getElementById('slideCard');
+    const finalCard = document.getElementById('finalCard');
+    const slideTitle = document.getElementById('slideTitle');
+    const slideText = document.getElementById('slideText');
+    const nextBtn = document.getElementById('nextBtn');
+    const backBtn = document.getElementById('backBtn');
+    const progress = document.getElementById('progress');
+    const repairSection = document.getElementById('repairSection');
+    const summaryText = document.getElementById('summaryText');
+    const submitStatus = document.getElementById('submitStatus');
+
+    function renderProgress() {
+      progress.innerHTML = '';
+      slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === step ? ' active' : '');
+        progress.appendChild(dot);
+      });
+    }
+
+    function renderSlide() {
+      const s = slides[step];
+      slideTitle.textContent = s.title;
+      slideText.textContent = s.text;
+      nextBtn.textContent = s.button;
+      backBtn.classList.toggle('hidden', step === 0);
+      renderProgress();
+    }
+
+    document.getElementById('readMeBtn').onclick = () => {
+      document.getElementById('letter').classList.add('opening');
+      document.getElementById('flap').classList.add('opening');
+      setTimeout(() => {
+        envelopeScreen.classList.add('hidden');
+        slideCard.classList.remove('hidden');
+        renderSlide();
+      }, 850);
+    };
+
+    nextBtn.onclick = () => {
+      if (step < slides.length - 1) {
+        step += 1;
+        renderSlide();
+      } else {
+        slideCard.classList.add('hidden');
+        finalCard.classList.remove('hidden');
+      }
+    };
+
+    backBtn.onclick = () => {
+      if (step > 0) {
+        step -= 1;
+        renderSlide();
+      }
+    };
+
+    document.getElementById('toggleRepairBtn').onclick = () => {
+      repairSection.classList.toggle('hidden');
+    };
+
+    document.getElementById('restartBtn').onclick = () => location.reload();
+
+    const repairWrap = document.getElementById('repairOptions');
+    repairOptions.forEach(option => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = option;
+      btn.onclick = () => {
+        if (selectedRepairs.has(option)) {
+          selectedRepairs.delete(option);
+          btn.classList.remove('active');
+        } else {
+          selectedRepairs.add(option);
+          btn.classList.add('active');
+        }
+        updateSummary();
+      };
+      repairWrap.appendChild(btn);
+    });
+
+    const meetWrap = document.getElementById('meetOptions');
+    meetOptions.forEach(option => {
+      const btn = document.createElement('button');
+      btn.className = 'meet-btn';
+      btn.textContent = option;
+      btn.onclick = () => {
+        selectedMeet = option;
+        [...meetWrap.children].forEach(el => el.classList.remove('active'));
+        btn.classList.add('active');
+        updateSummary();
+      };
+      meetWrap.appendChild(btn);
+    });
+
+    const needsInput = document.getElementById('needsInput');
+    const hurtInput = document.getElementById('hurtInput');
+    const rightNowInput = document.getElementById('rightNowInput');
+    [needsInput, hurtInput, rightNowInput].forEach(el => el.addEventListener('input', updateSummary));
+
+    function getSummary() {
+      const repairs = [...selectedRepairs];
+      const repairText = repairs.length ? repairs.map((item, i) => `${i + 1}. ${item}`).join('\n') : 'No options selected yet.';
+      return `What can I do to fix us?\n\nChosen repair options:\n${repairText}\n\nPreferred meetup: ${selectedMeet || 'Not chosen yet'}\n\nWhat you need from me:\n${needsInput.value || '(left blank)'}\n\nWhat hurt you the most:\n${hurtInput.value || '(left blank)'}\n\nWhat can I do right now to make this better:\n${rightNowInput.value || '(left blank)'}`;
+    }
+
+    function updateSummary() {
+      summaryText.textContent = getSummary();
+    }
+    updateSummary();
+
+    document.getElementById('copyBtn').onclick = async () => {
+      try {
+        await navigator.clipboard.writeText(getSummary());
+        submitStatus.textContent = 'Copied 🤍';
+      } catch {
+        submitStatus.textContent = 'Could not copy just now.';
+      }
+    };
+
+    document.getElementById('resetAnswersBtn').onclick = () => {
+      selectedRepairs.clear();
+      selectedMeet = '';
+      document.querySelectorAll('.option-btn,.meet-btn').forEach(btn => btn.classList.remove('active'));
+      needsInput.value = '';
+      hurtInput.value = '';
+      rightNowInput.value = '';
+      submitStatus.textContent = '';
+      updateSummary();
+    };
+
+    document.getElementById('submitBtn').onclick = async () => {
+      submitStatus.textContent = '';
+      const payload = {
+        recipientName,
+        notificationEmail,
+        selectedRepairs: [...selectedRepairs],
+        selectedMeet,
+        needs: needsInput.value,
+        hurtMost: hurtInput.value,
+        rightNow: rightNowInput.value,
+        summaryText: getSummary(),
+        submittedAt: new Date().toISOString()
+      };
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        submitStatus.textContent = 'Submitted 🤍 Your answers should land in Google Sheets and email.';
+      } catch {
+        submitStatus.textContent = 'Something went wrong while submitting.';
+      }
+    };
+
+    const grumpyBtn = document.getElementById('grumpyBtn');
+    const grumpyText = document.getElementById('grumpyText');
+    const forgiveState = document.getElementById('forgiveState');
+    const forgivenState = document.getElementById('forgivenState');
+    const heartBurst = document.getElementById('heartBurst');
+    const lines = [
+      'Try pressing the grumpy button if you can 😌',
+      'Eh eh why are you running from love?',
+      'Okay this is getting dramatic, baby.',
+      'At this point you clearly miss me too.'
+    ];
+
+    function moveGrumpy() {
+      const x = Math.floor(Math.random() * 180) - 90;
+      const y = Math.floor(Math.random() * 90) - 45;
+      grumpyBtn.style.transform = `translate(${x}px, ${y}px)`;
+      catchCount += 1;
+      grumpyText.textContent = catchCount < 1 ? lines[0] : catchCount < 4 ? lines[1] : catchCount < 8 ? lines[2] : lines[3];
+    }
+
+    grumpyBtn.onmouseenter = moveGrumpy;
+    grumpyBtn.onclick = moveGrumpy;
+
+    document.getElementById('forgiveBtn').onclick = () => {
+      forgiveState.classList.add('hidden');
+      forgivenState.classList.remove('hidden');
+      heartBurst.innerHTML = '';
+      for (let i = 0; i < 14; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart-pop';
+        heart.textContent = '❤';
+        heart.style.setProperty('--x', `${(i % 2 === 0 ? -1 : 1) * (12 + i * 4)}px`);
+        heart.style.setProperty('--y', `${80 + i * 4}px`);
+        heart.style.animationDelay = `${i * 0.05}s`;
+        heartBurst.appendChild(heart);
+      }
+    };
+  </script>
+</body>
+</html>
